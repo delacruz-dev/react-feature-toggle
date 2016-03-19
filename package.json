@@ -1,0 +1,71 @@
+{
+  "name": "react-toggles",
+  "version": "0.0.0",
+  "main": "dist/",
+  "scripts": {
+    "clean:lib": "rimraf ./lib/*",
+    "clean:dist": "rimraf ./dist/*",
+    "predist": "npm run clean:dist -s",
+    "dist": "webpack",
+    "prelib": "npm run clean:lib -s",
+    "lib": "npm run lib:scripts && npm run lib:styles",
+    "lib:scripts": "babel src --out-dir lib",
+    "lib:styles": "copyfiles -u 1 './src/**/*.scss' lib",
+    "prepublish": "npm run lib && npm run dist",
+    "lint": "npm run lint:eslint && npm run lint:sass",
+    "lint:eslint": "eslint --ext=.js --ext=.jsx ./src/ ./test/ ./docs/",
+    "lint:sass": "sass-lint src/**/*.scss -c -v",
+    "test": "mocha --compilers js:babel-register --recursive --require babel-polyfill",
+    "test:watch": "npm run test -- -w test src --watch-extensions jsx",
+    "start": "npm run start:open && npm run start:server",
+    "start:server": "webpack-dev-server",
+    "start:open": "opener http://localhost:8080",
+    "predoc": "rimraf ./docs/dist/*",
+    "doc": "npm run dist && npm run doc:copy && npm run doc:publish",
+    "doc:copy": "copyfiles ./dist/* ./docs/",
+    "doc:publish": "gh-pages -d docs",
+    "phoenix": "rimraf ./node_modules/ && npm install"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
+  "peerDependencies": {
+    "react": "0.14"
+  },
+  "devDependencies": {
+    "@schibstedspain/frontend-pre-commit-rules": "6.6.2",
+    "@schibstedspain/theme-basic": "3.0.1",
+    "babel": "6.5.2",
+    "babel-cli": "6.6.5",
+    "babel-core": "6.7.2",
+    "babel-eslint": "5.0.0",
+    "babel-loader": "6.2.4",
+    "babel-preset-es2015": "6.6.0",
+    "babel-preset-react": "6.5.0",
+    "chai": "3.5.0",
+    "copyfiles": "0.2.1",
+    "css-loader": "0.23.1",
+    "eslint": "2.3.0",
+    "eslint-plugin-react": "4.2.1",
+    "extract-text-webpack-plugin": "1.0.1",
+    "gh-pages": "0.11.0",
+    "mocha": "2.4.5",
+    "node-sass": "3.4.2",
+    "opener": "1.4.1",
+    "react": "0.14",
+    "react-dom": "0.14",
+    "rimraf": "2.5.0",
+    "sass-lint": "1.5.1",
+    "sass-loader": "3.1.2",
+    "style-loader": "0.13.0",
+    "webpack": "1.12.14",
+    "webpack-dev-server": "1.14.1",
+    "webpack-merge": "0.8.3"
+  }
+}
