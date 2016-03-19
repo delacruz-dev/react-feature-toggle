@@ -1,5 +1,5 @@
 {
-  "name": "react-toggle",
+  "name": "react-feature-toggle",
   "version": "0.1.0",
   "main": "dist/",
   "scripts": {
@@ -39,7 +39,7 @@
     "react": "0.14"
   },
   "devDependencies": {
-    "@schibstedspain/frontend-pre-commit-rules": "6.6.2",
+    "@schibstedspain/frontend-pre-commit-rules": "6.6.3",
     "@schibstedspain/theme-basic": "3.0.1",
     "babel": "6.5.2",
     "babel-cli": "6.6.5",

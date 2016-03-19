@@ -1,4 +1,4 @@
-# react-toggle
+# react-feature-toggle
 
 ## Introduction
 React Toggles is a proof of concept of a Higher Order Component to implement feature toggles.
