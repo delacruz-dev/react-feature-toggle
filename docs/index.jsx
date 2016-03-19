@@ -1,3 +1,4 @@
+/* eslint no-undef:0 */
 import 'babel-polyfill';
 import React from 'react';
 import ReactDom from 'react-dom';

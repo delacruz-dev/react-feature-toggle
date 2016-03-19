@@ -1,6 +1,6 @@
 /* eslint no-unused-expressions:0 */
 import {expect} from 'chai';
-import ReactToggle from '../src/react-toggle';
+import {ReactToggle} from '../src/react-toggle';
 
 describe('react-toggle component test suite', () => {
 

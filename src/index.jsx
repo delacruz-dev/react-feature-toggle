@@ -1,3 +1,2 @@
-import { ReactToggle } from './react-toggle';
-
-export { ReactToggle };
+import {ReactToggle} from './react-toggle';
+export {ReactToggle};

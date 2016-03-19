@@ -8,7 +8,7 @@ const ReactToggle = ComposedComponent => class extends Component {
   static propTypes() {
     return {
       promise: React.PropTypes.func
-    }
+    };
   }
   componentDidMount() {
     this.props.promise.then(toggles => this.setState({toggles}));
