@@ -1,7 +1,7 @@
 {
   "name": "react-feature-toggle",
-  "version": "0.2.0",
-  "main": "dist/",
+  "version": "0.3.0",
+  "main": "lib/",
   "scripts": {
     "clean:lib": "rimraf ./lib/*",
     "clean:dist": "rimraf ./dist/*",
