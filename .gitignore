@@ -30,6 +30,9 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 
+# Vendors file
+vendors.js
+
 
 ### OSX ###
 .DS_Store
@@ -57,7 +60,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
 
 ### Sass ###
 .sass-cache

@@ -62,7 +62,10 @@ if(TARGET === 'start:server' || !TARGET) {
 
 if(TARGET === 'dist') {
   module.exports = merge(base, {
-    entry: path.resolve(__dirname, 'docs/index.jsx'),
+    entry: {
+      app: path.resolve(__dirname, 'docs/index.jsx'),
+      vendors: ['react', 'react-dom', 'babel-polyfill']
+    },
     output: {
       filename: 'dist/index.js'
     },
@@ -71,7 +74,8 @@ if(TARGET === 'dist') {
         compress: {
           warnings: false
         }
-      })
+      }),
+      new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
     ]
   });
 }
