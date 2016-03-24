@@ -29,37 +29,52 @@ class MyComponent extends Component {
 }
 ```
 
-The component will receive a prop named `toggles` with an array of toggles, similar to this:
+The component will receive a prop named `toggles` with an array of toggles. You are free to implement any object pattern with the information needed to implement your toggle. This may be the simplest configuration possible to activate a simple toggle:
 
 ```javascript
 [{
   myToggle: true
-}, {
-  myDisabledToggle: false
-}, {
-  yetAnotherToggle: true
 }]
 ```
 
+Just keep in mind to be consistent when implementing the feature toggle in your component, and with the object you are sending in the array of toggles.
+
 In the previous example, the component will only make use of `myToggle`... But how does it receive it? This is where `react-feature-toggles` is useful.
 
-First, wrap your component into the higher order component `ReactToggle`:
+React Feature Toggles provides you two HOC: `ToggleApp` and `ToggleComponent`. Let's examine them in detail:
+
+## ToggleComponent
+At the component level, just wrap your component into the higher order component `ToggleComponent`:
 
 ```javascript
-import { ReactToggle } from "../src";
+import { ToggleComponent } from 'react-feature-toggle';
 ...
-export default ReactToggle(MyComponent);
+export default ToggleComponent(MyComponent);
 ```
 
-This will export your component as a _toggleable_ component.
+This will export your component as a _toggled_ component. What does it mean? Just that it will be wrapped with a Higher Order Component that will receive by context an array of toggles and pass it as props to your component.
 
-Secondly, the user of your component will need to provide the toggles somehow. It's up to you how to decide which toggles are activated or not, but you must provide the component a `promise` property with a `Promise` function that returns an array of feature toggles on being fullfilled:
+Please notice that you only need to wrap your toggled component with the `ToggleComponent`, not the rest of your application's components, and the organic components using it neither. Please review the `docs` folder for a full example.
+
+## ToggleApp
+At the top level of your application, you must wrap your app with the higher order component `ToggleApp`:
 
 ```javascript
-ReactDom.render(<MyComponent promise={
-  new Promise(resolve => {
-    resolve([{myToggle: true}]);
-  })
-}
-/>, document.getElementById('main'));
+import { ToggleApp } from 'react-feature-toggle';
+...
+const MyToggledApp = ToggleApp(MyApp, toggles);
 ```
+
+The way to provide the array of toggles is up to you, but keep in mind that the user of your app will need to provide the toggles somehow. In the following example, I'm providing a `Promise` function that returns an array of feature toggles on being fullfilled:
+
+```javascript
+new Promise(resolve => {
+  resolve([{myToggle: false}]);
+})
+.then(toggles => {
+  const MyToggledApp = ToggleApp(MyApp, toggles);
+  ReactDom.render(<MyToggledApp />, document.getElementById('main'));
+});
+```
+
+Please review the `docs` folder to get a complete example.

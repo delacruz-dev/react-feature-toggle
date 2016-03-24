@@ -1,6 +1,6 @@
 {
   "name": "react-feature-toggle",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "lib/",
   "scripts": {
     "clean:lib": "rimraf ./lib/*",
@@ -15,8 +15,6 @@
     "lint": "npm run lint:eslint && npm run lint:sass",
     "lint:eslint": "eslint --ext=.js --ext=.jsx ./src/ ./test/ ./docs/",
     "lint:sass": "sass-lint src/**/*.scss -c -v",
-    "test": "mocha --compilers js:babel-register --recursive --require babel-polyfill",
-    "test:watch": "npm run test -- -w test src --watch-extensions jsx",
     "start": "npm run start:open && npm run start:server",
     "start:server": "webpack-dev-server",
     "start:open": "opener http://localhost:8080",
@@ -32,8 +30,7 @@
     "url": ""
   },
   "pre-commit": [
-    "lint",
-    "test"
+    "lint"
   ],
   "peerDependencies": {
     "react": "0.14"

@@ -1,10 +1,13 @@
 /* eslint react/prop-types: 0 new-cap: 0 */
-import { ReactToggle } from '../src';
+import { ToggleComponent } from '../src';
 import React, { Component } from 'react';
 
 class MyComponent extends Component {
+  constructor(...args){
+    super(...args);
+  }
   render() {
-    let myToggle = this.props.toggles.find(t => {
+    let myToggle = this.props.toggles && this.props.toggles.find(t => {
       let {myToggle} = t;
       return myToggle;
     });
@@ -16,4 +19,4 @@ class MyComponent extends Component {
   }
 }
 
-export default ReactToggle(MyComponent);
+export default ToggleComponent(MyComponent);
