@@ -9,6 +9,11 @@ A **_feature toggle_** system allows you to integrate features into your codebas
 Feature toggles can allow software integration cycles that run in weeks, days, or even hours, as opposed to months or years. They are an essential component in a broader continuous integration system.
 ([via](https://github.com/ericelliott/feature-toggle))
 
+## Installation
+```
+$ npm install --save react-feature-toggle
+```
+
 ## How to use it
 First of all, create your component as if it were to receive by props an array with feature toggles:
 
@@ -65,7 +70,7 @@ import { ToggleApp } from 'react-feature-toggle';
 const MyToggledApp = ToggleApp(MyApp, toggles);
 ```
 
-The way to provide the array of toggles is up to you, but keep in mind that the user of your app will need to provide the toggles somehow. In the following example, I'm providing a `Promise` function that returns an array of feature toggles on being fullfilled:
+The way to provide the array of toggles is up to you, but keep in mind that the user of your app will need to provide the toggles somehow. In the following example, I'm providing a `Promise` function that returns an array of feature toggles on being fullfilled. In production, it may be a good idea your togles from a configuration file, or a dedicated service. Also, keep in mind that you might implement some logic to decide which toggle are you activating to every of your users. The following is just for illustrative purpose only:
 
 ```javascript
 new Promise(resolve => {
