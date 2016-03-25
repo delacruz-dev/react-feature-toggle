@@ -1,7 +1,7 @@
 {
   "name": "react-feature-toggle",
   "description": "A simple solution for implementing feature toggles in react",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "main": "lib/",
   "scripts": {
     "clean:lib": "rimraf ./lib/*",
@@ -29,6 +29,10 @@
   "repository": {
     "type": "git",
     "url": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:danderu/react-feature-toggle.git"
   },
   "pre-commit": [
     "lint"

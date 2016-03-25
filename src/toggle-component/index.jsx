@@ -23,7 +23,7 @@ const ToggleComponent = ComposedComponent => class extends Component {
     return this.toggles ? {
       toggles: this.toggles
     } : {
-      toggles: [{ noToggles: true }]
+      toggles: []
     };
   }
   render() {
