@@ -15,10 +15,22 @@ class MyApp extends Component {
   }
 }
 
-new Promise(resolve => {
-  resolve([{myToggle: false}]);
-})
-.then(toggles => {
-  const MyToggledApp = ToggleApp(MyApp, toggles);
-  ReactDom.render(<MyToggledApp />, document.getElementById('main'));
+const toggles = [
+  'myComponentDefault',
+  'myComponentA',
+  'myComponentB'
+];
+
+const chooseToggle = () => {
+  return toggles[Math.floor((Math.random() * 2))];
+};
+
+const MyToggledApp = ToggleApp(MyApp, {
+  [chooseToggle()]: {
+    props: {
+      title: 'This text is provided by the toggle object'
+    }
+  }
 });
+
+ReactDom.render(<MyToggledApp />, document.getElementById('main'));

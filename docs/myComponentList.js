@@ -7,12 +7,14 @@ class MyComponentList extends Component {
     super(...args);
   }
   render() {
-    return (<div>
-      <MyComponent />
-      <MyComponent />
-      <MyComponent />
-      <MyComponent />
-    </div>);
+    return (
+      <div>
+        <MyComponent title={'First Component'} subtitle={'This text is not overwritten by the toggle'}/>
+        <MyComponent title={'Second Component'} subtitle={'This text is not overwritten by the toggle'} />
+        <MyComponent title={'Third Component'} subtitle={'This text is not overwritten by the toggle'} />
+        <MyComponent title={'Fourth Component'} subtitle={'This text is not overwritten by the toggle'} />
+      </div>
+    );
   }
 }
 
