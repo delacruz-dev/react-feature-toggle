@@ -1,12 +1,36 @@
 /* eslint no-undef:0 */
+/* eslint new-cap:0 */
 import 'babel-polyfill';
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import MyComponent from './myComponent';
+import MyComponentList from './myComponentList';
+import { ToggleApp } from '../src';
 
-ReactDom.render(<MyComponent promise={
-  new Promise(resolve => {
-    resolve([{myToggle: true}]);
-  })
+class MyApp extends Component {
+  constructor(...args){
+    super(...args);
+  }
+  render() {
+    return <MyComponentList />;
+  }
 }
-/>, document.getElementById('main'));
+
+const toggles = [
+  'myComponentDefault',
+  'myComponentA',
+  'myComponentB'
+];
+
+const chooseToggle = () => {
+  return toggles[Math.floor((Math.random() * 2))];
+};
+
+const MyToggledApp = ToggleApp(MyApp, {
+  [chooseToggle()]: {
+    props: {
+      title: 'This text is provided by the toggle object'
+    }
+  }
+});
+
+ReactDom.render(<MyToggledApp />, document.getElementById('main'));
