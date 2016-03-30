@@ -14,8 +14,8 @@ export default class MyComponentDefault extends Component {
     return (
       <article>
         <h1>My Component variation Default</h1>
-        <div>Toggle props: # {this.props.title}</div>
-        <div>Original props: # {this.props.subtitle}</div>
+        <div>{this.props.title}</div>
+        <div>{this.props.subtitle}</div>
       </article>
     );
   }
