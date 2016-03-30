@@ -14,11 +14,12 @@ class MyApp extends Component {
     return <MyComponentList />;
   }
 }
+  const MyToggledApp = ToggleApp(MyApp, {
+    myComponentA: {
+      props: {
+        title: 'This text is provided by the toggle object'
+      }
+    }
+  });
 
-new Promise(resolve => {
-  resolve([{myToggle: false}]);
-})
-.then(toggles => {
-  const MyToggledApp = ToggleApp(MyApp, toggles);
   ReactDom.render(<MyToggledApp />, document.getElementById('main'));
-});
