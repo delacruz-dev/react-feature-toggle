@@ -140,8 +140,12 @@ const chooseToggle = () => {
   return experiments.map(e => {
     return Object.keys(e).filter(p => !!e[p].variations)
       .map(p => {
-      const forced = e[p].variations.find(v => v.force);
-      return forced || e[p].variations[Math.floor(Math.random() * e[p].variations.length)];
+        // This is not part of react-feature-toggles, but you may want to
+        // implement in your application the ability to force one of the variations. 
+        // i.e. If you already know which one is the winner, but you can't deploy
+        // until tomorrow
+        const forced = e[p].variations.find(v => v.force);
+        return forced || e[p].variations[Math.floor(Math.random() * e[p].variations.length)];
     });
   })
   .reduce((prev, curr) => curr)
