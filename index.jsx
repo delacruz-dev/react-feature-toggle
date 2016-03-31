@@ -59,8 +59,6 @@ const chooseToggle = () => {
   }, {});
 };
 
-console.log(chooseToggle())
-
 // Wrap your application into the ToggleApp component and provide an object
 // with the active toggles for this request.
 const MyToggledApp = ToggleApp(MyApp, chooseToggle());
