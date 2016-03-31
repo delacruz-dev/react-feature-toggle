@@ -8,7 +8,7 @@ class MyComponentList extends Component {
   }
   render() {
     return (
-      <div>
+      <div className='row'>
         <MyComponent title={'First Component'} subtitle={'This text is not overwritten by the toggle'}/>
         <MyComponent title={'Second Component'} subtitle={'This text is not overwritten by the toggle'} />
         <MyComponent title={'Third Component'} subtitle={'This text is not overwritten by the toggle'} />

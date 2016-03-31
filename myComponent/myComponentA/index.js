@@ -12,11 +12,17 @@ export default class MyComponentA extends Component {
   }
   render() {
     return (
-      <article>
-        <h1>My Component variation A</h1>
-        <div>{this.props.title}</div>
-        <div>{this.props.subtitle}</div>
-      </article>
+      <div className='col s5 m6'>
+        <div className='card blue-grey darken-1'>
+          <div className='card-content white-text'>
+            <span className='card-title'>{this.props.title}</span>
+            <p>{this.props.subtitle}</p>
+          </div>
+          <div className='card-action'>
+            <a href='#'>This is a link</a>
+          </div>
+        </div>
+      </div>
     );
   }
 }

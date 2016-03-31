@@ -3,11 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>ReactToggles documentation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <style>
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      color: white;
+    }
+  </style>
 </head>
 <body>
-  <h1>React Feature Toggles</h1>
-  <p>Refresh the page to get a chance to see another version of the toggled component</p>
-  <div id="main"></div>
+  <header class="header indigo z-depth-1">
+    <h1>React Feature Toggles</h1>
+  </header>
+  <div class="container">
+    <p>Hit the refresh button the page to get a chance to see another version of the toggled component</p>
+    <a href="." class="btn waves-effect waves-light">Refresh</a>
+    <div id="main"></div>
+  </div>
   <script src="./dist/index.js"></script>
 </body>
 </html>
