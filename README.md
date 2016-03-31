@@ -1,4 +1,7 @@
 # react-feature-toggle
+
+**WARNING** This README.md file is not up to date. Please be patient while I rewrite it with the new API for version ^0.5.0. Meanwhile, follow the example in the docs page.
+
 React Feature Toggle is a proof of concept of a [Higher Order Component](https://gist.github.com/sebmarkbage/ef0bf1f338a7182b6775) to implement [feature toggles](http://martinfowler.com/bliki/FeatureToggle.html).
 
 ##What is a feature toggle?
