@@ -75,7 +75,7 @@ if(TARGET === 'dist') {
           warnings: false
         }
       }),
-      new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
+      new webpack.optimize.CommonsChunkPlugin('vendors', 'dist/vendors.js')
     ]
   });
 }
