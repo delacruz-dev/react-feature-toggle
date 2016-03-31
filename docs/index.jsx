@@ -21,13 +21,13 @@ class MyApp extends Component {
 const experiments = [{
   myComponent: {
     variations: [{
-      name: 'myComponentDefault',
-      props: {
-        title: 'This text is provided by the toggle object'
-      }
+      name: 'myComponentDefault'
     }, {
       name: 'myComponentA',
-      force: false
+      force: false,
+      props: {
+        title: 'Toggled title'
+      }
     }, {
       name: 'myComponentB'
     }]
@@ -54,7 +54,7 @@ const chooseToggle = () => {
   })
   .reduce((prev, curr) => curr)
   .reduce((prev, curr) => {
-    prev[curr.name] = curr.props ? curr.props : {};
+    prev[curr.name] = curr.props ? {props: curr.props} : {};
     return prev;
   }, {});
 };
