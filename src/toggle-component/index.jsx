@@ -1,13 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 
 const ToggleComponent = (def, ...toggled) => class ToggleComponent extends Component {
+  constructor(...args) {
+    super(...args);
+    this._toggles = this.context.toggles || {};
+  }
   static get childContextTypes() {
     return Object.assign({}, super.childContextTypes, {
-      toggles: React.PropTypes.object
+      toggles: PropTypes.object
     });
   }
   getChildContext() {
-    return (super.getChildContext && super.getChildContext()) || {};
+    return (super.getChildContext && super.getChildContext()) || { toggles: {} };
   }
   static get contextTypes() {
     return {
@@ -16,10 +20,10 @@ const ToggleComponent = (def, ...toggled) => class ToggleComponent extends Compo
   }
   render() {
     const Toggle = toggled.reduce( (actual, t) => {
-      return Object.keys(this.context.toggles).find(k => k === t.displayName) ? t : actual;
+      return Object.keys(this._toggles).find(k => k === t.displayName) ? t : actual;
     }, def);
 
-    const props = Object.assign({}, this.props, this.context.toggles[Toggle.displayName] && this.context.toggles[Toggle.displayName].props);
+    const props = Object.assign({}, this.props, this._toggles[Toggle.displayName] && this._toggles[Toggle.displayName].props);
     return <Toggle {...props} />;
   }
 };
