@@ -1,6 +1,6 @@
 import asciiJSON from 'ascii-json';
 
-export default class Universal {
+class Universal {
 
   /**
     * Escapes the json object to make it suitable for being injected into the markup
@@ -30,3 +30,5 @@ export default class Universal {
                                             : markup + injected;
   }
 }
+
+export { Universal };
