@@ -1,6 +1,6 @@
 # react-feature-toggle
 
-React Feature Toggle is a [Higher Order Component](https://gist.github.com/sebmarkbage/ef0bf1f338a7182b6775) for helping you to implement [feature toggles](http://martinfowler.com/bliki/FeatureToggle.html).
+React Feature Toggle is a **universal javascript utility** (aka isomorphic) to help you implement [feature toggles](http://martinfowler.com/bliki/FeatureToggle.html).
 
 ## What is a feature toggle?
 **_Continuous deployment_** is the process of testing, integrating, and deploying software in rapid cycles in order to deliver bug fixes and new features to customers as quickly as possible. It gained popular acceptance as a cornerstone of extreme programming and agile development. It is very popular among Software as a Service providers.
@@ -34,6 +34,7 @@ export default class MyComponentList extends Component {
   }
 }
 ```
+
 Please check the [docs](https://github.com/danderu/react-feature-toggle/tree/master/docs) folder for reference.
 
 ### Recommended folder structure
@@ -51,11 +52,13 @@ Let's say you would like to test a couple of variations: **myComponentA** and **
 ```
 The folder names are not important. What is important is to have a nice folder structure that allows you to test easily without having to modify the rest of your application. And once you have a winner variation, discard the others just removing files and folders.
 
-You can work in each variation without knowing that it's going to be part of a feature toggle experiment. Every variation has nothing special. 
+You can work in each variation without knowing that it's going to be part of a feature toggle experiment. Every variation has nothing special.
 
 Please note that one of them, **myComponentDefault** represents in this example your current version of the component, already in production.
 
 ### ToggleComponent
+The implementation of **react-feature-toggle** is based on two [Higher Order Components](https://gist.github.com/sebmarkbage/ef0bf1f338a7182b6775). These HOC allows you to pass the feature toggle configuration from the entry point of your application to every inner component containing toggles.
+
 You must implement your toggle in the `index.js` file located at the root of your component folder.
 
 ```javascript
@@ -141,7 +144,7 @@ const chooseToggle = () => {
     return Object.keys(e).filter(p => !!e[p].variations)
       .map(p => {
         // This is not part of react-feature-toggles, but you may want to
-        // implement in your application the ability to force one of the variations. 
+        // implement in your application the ability to force one of the variations.
         // i.e. If you already know which one is the winner, but you can't deploy
         // until tomorrow
         const forced = e[p].variations.find(v => v.force);
@@ -162,4 +165,47 @@ const MyToggledApp = ToggleApp(MyApp, chooseToggle());
 ReactDom.render(<MyToggledApp />, document.getElementById('main'));
 ```
 
+## Universal Javascript Apps
+For implementing _isomorphic_ or universal javascript apps, the key concept you've got to keep in mind is that the markup **must** be the same in both server and in the client sides.
+
+To fullfill this requirement, there are different approaches. React Feautre Toggles uses the same approach as [React Transmit](https://github.com/RickWong/react-transmit/blob/master/src/lib/injectIntoMarkup.js). The basic idea is simple:
+
+Render your React.JS app in the server side, and _ensure_ that the markup is going to be the same in the client. Otherwise, when React.JS evaluates the DOM tree in the client side, it will see a difference and it will re-render your app. This is exactly what you need to avoid.
+
+So, for feature toggles, calculate your feature toggles object in the server side and use the provided `Universal` class for injecting that object into the markup. For example:
+
+```javascript
+import {Universal} from 'react-feature-toggle';
+
+...
+
+const toggles = getToggles();
+let markup = YourApp.renderToString();
+markup = Universal.injectIntoMarkup({
+  markup: markup,
+  toggles: toggles,
+  name: 'featureToggles'
+});
+```
+
+The `injectIntoMarkup()` function receives threee parameters:
+
+- **@param {String} markup** - The page's markup, rendered to string
+- **@param {Object} toggles** - The feature toggles object
+- **@param {String} name** - The name you wish to give to the global variable to will contain the stringified feature toggles JSON object
+- **@returns {String}** - The original markup with a `<script>` tag containing the feature toggles setup assigned to a global (window.[name]) variable.
+
+This will inject into the markup a `<script>` tag with your toggles object:
+
+```html
+<script>window.featureToggles={yourToggle{props:{yourProp:'some-value'}}};</script>
+```
+
+Finally, when wrapping your application into the `ToggleApp` component, you just have to set the toggles object to the window variable you've created. Just be sure to do it just **after** the toggle object injection script in your markup:
+
+```javascript
+const MyToggledApp = ToggleApp(MyApp, window.featureToggles);
+```
+
+## Examples
 Please review the `docs` folder for a complete example.

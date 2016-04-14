@@ -1,7 +1,7 @@
 {
   "name": "react-feature-toggle",
   "description": "A simple solution for implementing feature toggles in react",
-  "version": "0.6.1",
+  "version": "1.0.0",
   "main": "lib/",
   "scripts": {
     "clean:lib": "rimraf ./lib/*",
@@ -66,5 +66,8 @@
     "webpack": "1.12.14",
     "webpack-dev-server": "1.14.1",
     "webpack-merge": "0.8.3"
+  },
+  "dependencies": {
+    "ascii-json": "0.2.0"
   }
 }
