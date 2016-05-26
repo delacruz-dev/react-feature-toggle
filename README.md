@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/danderu/react-feature-toggle/badges/gpa.svg)](https://codeclimate.com/github/danderu/react-feature-toggle)
+
 # react-feature-toggle
 
 React Feature Toggle is a **universal javascript utility** (aka isomorphic) to help you implement [feature toggles](http://martinfowler.com/bliki/FeatureToggle.html).
